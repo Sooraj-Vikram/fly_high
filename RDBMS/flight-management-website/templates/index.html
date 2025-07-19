@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Airline Management System</h1>
+    </header>
+    <nav>
+    <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('flight_management') }}">Flight Details</a></li>
+        <li><a href="{{ url_for('passenger_management') }}">Passenger Registration</a></li>
+        <li><a href="{{ url_for('bookings') }}">Ticket Bookings</a></li>
+        <li><a href="{{ url_for('transaction_management') }}">Transaction Details</a></li>
+    </ul>
+    </nav>
+
+    <section>
+        <h2>Welcome to Our Flight Management System</h2>
+        <p>Our platform offers you a seamless experience in managing your flight details. Whether you are a passenger looking to book a flight or a staff member managing flight information, this system provides all the tools you need.</p>
+
+        <h3>Services We Provide:</h3>
+        <ul>
+            <li>Search for available flights</li>
+            <li>Book flights easily and manage your bookings</li>
+            <li>Cancel booked flights with a simple process</li>
+            <li>View and manage flight schedules and passenger lists</li>
+        </ul>
+
+        <p>Our goal is to provide a smooth, efficient, and easy-to-use interface for handling all your flight-related tasks. Use the navigation bar above to explore the system.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Flight Management System. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

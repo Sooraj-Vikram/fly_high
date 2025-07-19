@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Flight Details</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('flight_management') }}">Flight Details</a></li>
+            <li><a href="{{ url_for('passenger_management') }}">Passenger Registration</a></li>
+            <li><a href="{{ url_for('bookings') }}">Ticket Bookings</a></li>
+            <li><a href="{{ url_for('transaction_management') }}">Transaction Details</a></li>
+        </ul>
+    </nav>
+
+    <section>
+        <h2>Manage Flights</h2>
+        <p>Enter flight details below:</p>
+        
+        <!-- Update the action to match your Flask route -->
+        <form action="/flight-management" method="POST">
+            <label for="flight-id">Flight ID:</label>
+            <input type="text" id="flight-id" name="flight-id" required>
+
+            <label for="airline-name">Airline Name:</label>
+            <input type="text" id="airline-name" name="airline-name" required>
+
+            <label for="departure">Departure City:</label>
+            <input type="text" id="departure" name="departure" required><br><br>
+
+            <label for="destination">Destination City:</label>
+            <input type="text" id="destination" name="destination" required><br><br>
+
+            <label for="time">Departure Time:</label>
+            <input type="time" id="time" name="time" required><br><br>
+
+            <label for="arrival-time">Arrival Time:</label>
+            <input type="time" id="arrival-time" name="arrival-time" required>
+
+            <label for="seats-available">Seats Available:</label>
+            <input type="number" id="seats-available" name="seats-available" min="1" required>
+
+            <label for="ticket-price">Ticket Price (in INR):</label>
+            <input type="number" id="ticket-price" name="ticket-price" min="0" step="0.01" required><br><br>
+
+            <input type="submit" value="Add Flight">
+        </form>
+
+        <h2>Current Flights</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Flight ID</th>
+                    <th>Airline Name</th>
+                    <th>Departure</th>
+                    <th>Destination</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                    <th>Seats Available</th>
+                    <th>Ticket Price (INR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Flight data will be dynamically populated here -->
+                {% for flight in flights %}
+                <tr>
+                    <td>{{ flight['flight_id'] }}</td>
+                    <td>{{ flight['airline_name'] }}</td>
+                    <td>{{ flight['departure'] }}</td>
+                    <td>{{ flight['destination'] }}</td>
+                    <td>{{ flight['departure_time'] }}</td>
+                    <td>{{ flight['arrival_time'] }}</td>
+                    <td>{{ flight['seats_available'] }}</td>
+                    <td>&#8377;{{ flight['ticket_price'] }}</td> <!-- Updated to display in INR -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    <footer>
+        <p>Flight Management System &copy; 2024</p>
+    </footer>
+</body>
+</html>

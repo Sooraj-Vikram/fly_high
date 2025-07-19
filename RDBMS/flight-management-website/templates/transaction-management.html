@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Transaction Details</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('flight_management') }}">Flight Details</a></li>
+            <li><a href="{{ url_for('passenger_management') }}">Passenger Registration</a></li>
+            <li><a href="{{ url_for('bookings') }}">Ticket Bookings</a></li>
+            <li><a href="{{ url_for('transaction_management') }}">Transaction Details</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h2>Manage Transactions</h2>
+        <p>Here you can view and manage booking transactions.</p>
+
+        <!-- Transactions Table -->
+        <h3>Transaction Details</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Customer Name</th>
+                    <th>Flight ID</th>
+                    <th>Ticket Cost</th>
+                    <th>Transaction Mode</th>
+                </tr>
+            </thead>
+            <tbody id="transaction-data">
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.customer_id }}</td>
+                    <td>{{ transaction.customer_name }}</td>
+                    <td>{{ transaction.flight_id }}</td>
+                    <td>₹{{ transaction.ticket_cost }}</td>
+                    <td>{{ transaction.transaction_mode }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </section>
+    <footer>
+        <p>&copy; 2024 Flight Management System</p>
+    </footer>
+
+</body>
+</html>

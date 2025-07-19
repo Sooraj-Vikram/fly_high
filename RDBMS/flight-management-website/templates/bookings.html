@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Bookings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Ticket Bookings</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('flight_management') }}">Flight Details</a></li>
+            <li><a href="{{ url_for('passenger_management') }}">Passenger Registration</a></li>
+            <li><a href="{{ url_for('bookings') }}">Ticket Bookings</a></li>
+            <li><a href="{{ url_for('transaction_management') }}">Transaction Details</a></li>
+        </ul>
+    </nav>
+
+    <section>
+        <h2>Manage Bookings</h2>
+        <p>Here you can book flights, view bookings, and cancel reservations.</p>
+
+        <!-- Flight Booking Form -->
+        <h3>Book a Flight</h3>
+        <form action="{{ url_for('bookings') }}" method="POST">
+            <input type="hidden" name="action" value="book"> <!-- Action hidden field -->
+            <label for="customer-id">Customer ID:</label>
+            <input type="text" id="customer-id" name="customer-id" required><br><br>
+
+            <label for="flight-id">Flight ID:</label>
+            <input type="text" id="flight-id" name="flight-id" required><br><br>
+
+            <label for="transaction-mode">Transaction Mode:</label>
+            <select name="transaction_mode" id="transaction-mode" required>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+                <option value="Net Banking">Net Banking</option>
+                <option value="UPI">UPI</option>
+                <option value="PayPal">PayPal</option>
+            </select>
+
+            <input type="submit" value="Book Ticket">
+        </form>
+
+        <!-- Flight Cancellation Form -->
+        <h3>Cancel a Booking</h3>
+        <form action="{{ url_for('bookings') }}" method="POST">
+            <input type="hidden" name="action" value="cancel"> <!-- Action hidden field -->
+            <label for="cancel-customer-id">Customer ID:</label>
+            <input type="text" id="cancel-customer-id" name="customer-id" required><br><br>
+
+            <label for="cancel-flight-id">Flight ID:</label>
+            <input type="text" id="cancel-flight-id" name="flight-id" required><br><br>
+
+            <input type="submit" value="Cancel Booking">
+        </form>
+
+        <!-- Current Bookings -->
+        <h2>Current Bookings</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Flight ID</th>
+                    <th>Departure</th>
+                    <th>Destination</th>
+                    <th>Transaction Mode</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.customer_id }}</td>
+                    <td>{{ booking.flight_id }}</td>
+                    <td>{{ booking.departure }}</td>
+                    <td>{{ booking.destination }}</td>
+                    <td>{{ booking.transaction_mode }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    <footer>
+        <p>&copy; 2024 Flight Management System</p>
+    </footer>
+</body>
+</html>
